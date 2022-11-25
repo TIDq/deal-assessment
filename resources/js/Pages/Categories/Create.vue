@@ -3,14 +3,18 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
 
 const props = defineProps({
-    post: Object,
+    categories: {
+        type: Object,
+        default: () => ({}),
+    },
 });
+
 const form = useForm({
-    title: props.post.title,
-    body: props.post.body
+    title: ''
 });
+
 const submit = () => {
-    form.put(route('posts.update', props.post.id));
+    form.post(route('categories.store'));
 };
 
 </script>
@@ -20,7 +24,7 @@ const submit = () => {
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Edit Post
+                Create Category
             </h2>
         </template>
 
@@ -29,7 +33,7 @@ const submit = () => {
                 <div class="bg-white overflow-hidden shadow-sm sm-rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
                         <div class="flex items-center justify-between mb-6">
-                            <Link class="px-6 py-2 text-white bg-blue-500 rounded" :href="route('posts.index')">
+                            <Link class="px-6 py-2 text-white bg-blue-500 rounded" :href="route('categories.index')">
                             Back
                             </Link>
                         </div>
@@ -39,29 +43,15 @@ const submit = () => {
                                     <label 
                                     for="Title">Title</label>
                                     <input
-                                    
                                     type="text"
-                                    class="mt-1 block w-full"
+                                    class="mt- block w-full"
                                     v-model="form.title"
-                                    placeholder="" 
+                                    placeholder=""
+                                    autofocus 
                                     />
                                 <span class="text-red-600" v-if="form.errors.title">
                                     {{ form.errors.title }}
                                 </span>
-                                </div>
-                                <div class="mb-4">
-                                    <label 
-                                    for="body">Body</label>
-                                    <textarea
-                                    id=""
-                                    type="text"
-                                    class="mt-1 block w-full"
-                                    v-model="form.body"
-                                    ></textarea>
-                                    <span 
-                                        class="text-red-600" v-if="form.errors.body">
-                                        {{ form.errors.body }}
-                                    </span>                                    
                                 </div>
                             </div>
 

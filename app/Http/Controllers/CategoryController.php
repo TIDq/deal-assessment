@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Validator;
 
 
-class PostController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
-        return Inertia::render('Posts/Index', ['posts' => $posts]);
+        $categories = Category::all();
+        return Inertia::render('Categories/Index', ['categories' => $categories]);
     }
 
     /**
@@ -28,7 +28,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Posts/Create');
+        return Inertia::render('Categories/Create');
     }
 
     /**
@@ -44,9 +44,9 @@ class PostController extends Controller
             'body' => ['required'],
         ])->validate();
 
-        Post::create($request->all());
+        Category::create($request->all());
 
-        return redirect()->route('posts.index');
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -55,7 +55,7 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Category $categories)
     {
         //
     }
@@ -66,10 +66,10 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Category $category)
     {
-        return Inertia::render('Posts/Edit', [
-            'post' => $post
+        return Inertia::render('Categories/Edit', [
+            'category' => $category
         ]);
     }
 
@@ -87,8 +87,8 @@ class PostController extends Controller
             'body' => ['required'],
         ])->validate();
 
-        Post::find($id)->update($request->all());
-        return redirect()->route('posts.index');
+        Category::find($id)->update($request->all());
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -99,7 +99,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        Post::find($id)->delete();
-        return redirect()->route('posts.index');      
+        Category::find($id)->delete();
+        return redirect()->route('categories.index');      
     }
 }

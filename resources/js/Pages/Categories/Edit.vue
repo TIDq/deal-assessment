@@ -3,14 +3,13 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
 
 const props = defineProps({
-    post: Object,
+    category: Object,
 });
 const form = useForm({
-    title: props.post.title,
-    body: props.post.body
+    title: props.category.title,
 });
 const submit = () => {
-    form.put(route('posts.update', props.post.id));
+    form.put(route('posts.update', props.category));
 };
 
 </script>
@@ -20,7 +19,7 @@ const submit = () => {
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Edit Post
+                Edit Category
             </h2>
         </template>
 
@@ -48,20 +47,6 @@ const submit = () => {
                                 <span class="text-red-600" v-if="form.errors.title">
                                     {{ form.errors.title }}
                                 </span>
-                                </div>
-                                <div class="mb-4">
-                                    <label 
-                                    for="body">Body</label>
-                                    <textarea
-                                    id=""
-                                    type="text"
-                                    class="mt-1 block w-full"
-                                    v-model="form.body"
-                                    ></textarea>
-                                    <span 
-                                        class="text-red-600" v-if="form.errors.body">
-                                        {{ form.errors.body }}
-                                    </span>                                    
                                 </div>
                             </div>
 
