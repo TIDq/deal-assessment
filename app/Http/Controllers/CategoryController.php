@@ -41,7 +41,6 @@ class CategoryController extends Controller
     {
         Validator::make($request->all(), [
             'title' => ['required'],
-            'body' => ['required'],
         ])->validate();
 
         Category::create($request->all());
@@ -84,7 +83,6 @@ class CategoryController extends Controller
     {
         Validator::make($request->all(), [
             'title' => ['required'],
-            'body' => ['required'],
         ])->validate();
 
         Category::find($id)->update($request->all());
@@ -100,6 +98,6 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         Category::find($id)->delete();
-        return redirect()->route('categories.index');      
+        return redirect()->route('categories.index');
     }
 }
