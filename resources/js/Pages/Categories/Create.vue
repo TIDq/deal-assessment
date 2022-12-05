@@ -13,9 +13,7 @@ const form = useForm({
     title: ''
 });
 
-const submit = () => {
-    form.post(route('categories.store'));
-};
+const formAction = route('categories.store');
 
 </script>
 
@@ -37,17 +35,17 @@ const submit = () => {
                             Back
                             </Link>
                         </div>
-                        <form @submit.prevents="submit">
+                        <form @submit.prevent="form.post(formAction)">
                             <div class="flex flex-col">
                                 <div class="mb-4">
-                                    <label 
+                                    <label
                                     for="Title">Title</label>
                                     <input
                                     type="text"
                                     class="mt- block w-full"
                                     v-model="form.title"
                                     placeholder=""
-                                    autofocus 
+                                    autofocus
                                     />
                                 <span class="text-red-600" v-if="form.errors.title">
                                     {{ form.errors.title }}
@@ -56,7 +54,7 @@ const submit = () => {
                             </div>
 
                             <div class="mt-4">
-                            <button 
+                            <button
                                 type="submit"
                                 class="text-white bg-green-500 focus:outline-none px-6 py-2 rounded"
                                 :disabled="form.processing"
